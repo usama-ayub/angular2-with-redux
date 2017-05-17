@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
 import { combineReducers } from 'redux';
-import { todoReducers } from './reducers/todo'
+import { todoReducers } from './reducers/todo';
+import { AuthActions } from './actions';
+
+export { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs';
+export { select, NgRedux } from 'ng2-redux';
+export { bindActionCreators } from 'redux';
+export { AuthActions } from './actions';
 export interface IAppState {
     todos: [any]
 }
@@ -13,7 +19,7 @@ const AppReducer = combineReducers<IAppState>({
         NgReduxModule
     ],
     providers: [
-
+        AuthActions
     ]
 })
 
