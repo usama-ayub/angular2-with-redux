@@ -1,0 +1,36 @@
+<ion-header class="bond-header">
+  <ion-navbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <form #todoItem="ngForm" (ngSubmit)="addTodo(todoItem)" novalidate>
+      <ion-item>
+        <ion-label floating>Today Task</ion-label>
+        <ion-input type="text" name="todoItem" #todoItem="ngModel" ngModel required></ion-input>
+      </ion-item>
+      <br/>
+      <div>
+        <button ion-button secondary type="submit" round>ADD</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <ion-card *ngFor="let item of todo;">
+      <ion-card-header>
+        <span style="float: left"><ion-icon name="close" (click)="deleteTodo(item)" ></ion-icon></span>
+        <span style="float: right"> <ion-icon name="bookmark" (click)="isActive(item)" *ngIf="item.isfavourite"></ion-icon></span>
+        <span style="float: right"> <ion-icon name="ios-bookmark-outline" (click)="isActive(item)"  *ngIf="!item.isfavourite"></ion-icon></span>
+      </ion-card-header>
+      <ion-card-content>
+        {{item.todoTask}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

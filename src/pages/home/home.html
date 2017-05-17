@@ -1,0 +1,54 @@
+<ion-header class="home-header">
+  <ion-navbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home-content">
+  <div class="home-coming-draw">
+    <div class="coming-draw-text">
+      <p>Coming Up Draw</p>
+    </div>
+    <div class="coming-draw-list">
+      <ion-item>
+        <ion-img width="80" height="80" src="assets/images.jpg"></ion-img>
+        <p>3/11/2017</p>
+      </ion-item>
+      <ion-item>
+        <ion-img width="80" height="80" src="assets/images.jpg"></ion-img>
+        <p>3/11/2017</p>
+      </ion-item>
+      <ion-item>
+        <ion-img width="80" height="80" src="assets/images.jpg"></ion-img>
+        <p>3/11/2017</p>
+      </ion-item>
+    </div>
+  </div>
+  <div class="home-select-bond">
+    <button ion-button block round color='secondary'>
+    Select Bond
+      </button>
+  </div>
+  <div class="home-graph">
+    <div> 
+      <canvas id="myChart" width="240px" height="240px"></canvas>
+    </div>
+  </div>
+  <div class="home-graph-table">
+    <ion-grid>
+      <ion-row class="row1">
+        <ion-col col-4>Bond</ion-col>
+        <ion-col col-4>Quantity</ion-col>
+        <ion-col col-4>Total</ion-col>
+      </ion-row>
+      <ion-row class="row2">
+        <ion-col col-4>100</ion-col>
+        <ion-col col-4>5</ion-col>
+        <ion-col col-4>500</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

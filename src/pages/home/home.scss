@@ -1,0 +1,54 @@
+page-home {}
+
+.home-header {
+    ion-navbar {
+        ion-title {
+           margin-left: 35%;
+        }
+    }
+}
+
+.home-content {
+    background-color: $light;
+    .home-coming-draw {
+        width: 100%;
+        color: white;
+        .coming-draw-list {
+            width: 100%;
+            background-color: $primary;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            ion-labal {
+                display: flex !important;
+                align-items: center !important;
+            }
+        }
+    }
+    .home-select-bond {
+        width: 100%;
+        margin-top: 15%;
+        button {
+            color: white;
+        }
+    }
+    .home-graph {
+        width: 100%;
+    }
+    .home-graph-table {
+        margin-top: 15%;
+        width: 100%;
+        text-align: center;
+        ion-grid {
+            ion-col:nth-child(1n+2) {
+                border-left: 1px solid;
+            }
+            border: 1px solid;
+            .row1 {
+                background-color: $primary;
+            }
+        }
+    }
+}
