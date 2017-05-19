@@ -1,3 +1,6 @@
+import { TodoActions } from '../actions';
+
+
 let initalTodos = [{
     todoTask: 'first',
     isfavourite: false
@@ -7,17 +10,17 @@ let initalTodos = [{
 }]
 export let todoReducers = (state = initalTodos, action) => {
     switch (action.type) {
-        case 'addTodo':
+        case TodoActions.ADDTODO:
             return [...state, action.payload]
-        case 'deleteTodo':
+        case TodoActions.DELETETODO:
             return state.filter(todo => todo !== action.payload)
-        case 'isActiveTodo':
+        case TodoActions.FAVOURITETODO:
             return state.map(todo => {
                 if (todo == action.payload) {
                     console.log(todo)
                     todo.isfavourite = !todo.isfavourite
                 }
-                return todo;                
+                return todo;
             })
         default:
             return state

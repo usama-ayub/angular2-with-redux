@@ -1,6 +1,6 @@
+import { AuthActions } from './../../store/action/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Observable, Subscription, AuthActions } from '../../store';
 @IonicPage()
 @Component({
   selector: 'page-login',
