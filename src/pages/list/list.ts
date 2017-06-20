@@ -1,51 +1,34 @@
 import { Component } from '@angular/core';
+
 import { NavController, NavParams } from 'ionic-angular';
-import { select, NgRedux } from 'ng2-redux';
-import { IAppState } from '../../store';
-import { Observable } from 'rxjs/Observable'
+
+import { ItemDetailsPage } from '../item-details/item-details';
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  @select('todos') todos$: Observable<any>;
+  icons: string[];
+  items: Array<{title: string, note: string, icon: string}>;
 
-  todo: any;
-  todoObj: any;
-  constructor(public navCtrl: NavController, public navParam: NavParams, private ngRedux: NgRedux<IAppState>) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
+    'american-football', 'boat', 'bluetooth', 'build'];
 
-  }
-  ngOnInit() {
-    this.todos$
-      .subscribe(arg => {
-        this.todo = arg;
+    this.items = [];
+    for(let i = 1; i < 11; i++) {
+      this.items.push({
+        title: 'Item ' + i,
+        note: 'This is item #' + i,
+        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
-  }
-
-  addTodo(todo) {
-    if (!todo.valid) { return console.log('field form') }
-    this.todoObj = {
-      todoTask: todo.value,
-      isfavourite: false
     }
-    this.ngRedux.dispatch({
-      type: 'addTodo', payload: this.todoObj
-    })
-    //todo.value = ' ';
   }
 
-  deleteTodo(index) {
-     this.ngRedux.dispatch({
-      type: 'deleteTodo', payload: index
-    })
+  itemTapped(event, item) {
+    this.navCtrl.push(ItemDetailsPage, {
+      item: item
+    });
   }
-
-  isActive(item) {
-    console.log(item)
-     this.ngRedux.dispatch({
-      type: 'isActiveTodo', payload: item
-    })
-  }
-
 }

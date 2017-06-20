@@ -1,46 +1,54 @@
-import { AuthActions } from '../actions';
+import { AuthActions } from '../action/auth';
 
+export interface IUser {
+    firstName: string,
+    lastName: string,
+    userName: string,
+    id: string,
+    username: string,
+    email: string
+}
+export interface IError {
+    success: Object,
+    data: any,
+    error: string
+}
 
-const InitalState = {
-    isLoading: false,
-    isLoggedin: null,
-    isLoggedinBtn: false,
-    isRegistered: false,
-    resetted: false,
-    user: null,
+export interface IAuthState {
+    success: Boolean,
+    data: IUser,
+    error: IError
+}
+
+const InitialState: IAuthState = {
+    success: false,
+    data: null,
     error: null
 };
 
-export const authReducer = function (state = InitalState, action) {
+export const AuthReducer = function (state: IAuthState = InitialState, action: { type: string, payload?: any }) {
     switch (action.type) {
-
-       
-        case AuthActions.LOGIN_FAIL:
+        case AuthActions.REGISTER_SUCCESS:
             return Object.assign({}, state, {
-                user: null,
-                error: { timestamp: new Date(), message: action.payload, type: AuthActions.LOGIN_FAIL }
-            });
-        case AuthActions.LOGIN_SUCCESS:
-            return Object.assign({}, state, {
-                user: action.payload.data,
-                error: null
-            });
-
-        case AuthActions.LOGOUT:
-            return Object.assign({}, state, {
-                isLoading: false,
-                isLoggedin: false,
-                isLoggedinBtn: false,
-                isRegistered: false,
-                user: null,
-                error: null
+                success: { timestamp: new Date(), type: AuthActions.REGISTER_SUCCESS, data: action.payload }
             });
         case AuthActions.REGISTER_FAIL:
             return Object.assign({}, state, {
-                error: { timestamp: new Date(), message: action.payload, type: AuthActions.REGISTER_FAIL }
+                error: { timestamp: new Date(), type: AuthActions.REGISTER_FAIL, data: action.payload.data }
             });
-        case AuthActions.REGISTER_SUCCESS:
+        case AuthActions.LOGIN_SUCCESS:
             return Object.assign({}, state, {
+                success: { timestamp: new Date(), type: AuthActions.LOGIN_SUCCESS },
+                user: action.payload.data
+            });
+        case AuthActions.LOGIN_FAIL:
+            return Object.assign({}, state, {
+                error: { timestamp: new Date(), type: AuthActions.LOGIN_FAIL, data: action.payload }
+            });
+        case AuthActions.LOGOUT:
+            return Object.assign({}, state, {
+                success: null,
+                user: null,
                 error: null
             });
         default:

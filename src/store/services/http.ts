@@ -59,20 +59,5 @@ export class HttpService {
         return this.http.delete(url).map((this.ResponseMap));
     }
 
-    uploadPhotoFromFile(data, userid) {
-        console.log('data', data);
-        console.log('userid', userid);
-        return new Observable(observer => {
-            debugger;
-            var fileRef = firebase.storage().ref(userid + '/' + data.name)
-            var uploadTask = fileRef.put(data);
-
-            uploadTask.on('state_changed', function (snapshot) {
-            }, function (error) {
-            }, function () {
-                let downloadURL: string = uploadTask.snapshot.downloadURL;
-                observer.next(downloadURL);
-            });
-        });
-    }
+ 
 }
