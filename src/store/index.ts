@@ -7,6 +7,8 @@ import { combineReducers } from 'redux';
 import { AuthActions } from './action/auth';
 import { AuthReducer, IAuthState } from './reducers/auth';
 import { AuthEpics } from './epics/auth';
+import { HttpService } from './services/http';
+export { HttpService } from './services/http';
 
 export interface IAppState {
    auth?: IAuthState
@@ -21,7 +23,8 @@ const AppReducer = combineReducers<IAppState>({
     ],
     providers: [
         AuthActions,
-        AuthEpics
+        AuthEpics,
+        HttpService
     ]
 })
 

@@ -44,7 +44,7 @@ export class AuthEpics {
     register = (action$: ActionsObservable<any>) =>
         action$.ofType(AuthActions.REGISTER)
             .switchMap(({ payload }) => {
-                return this.hs.PostRequest('/api/users', payload)
+                return this.hs.PostRequest(api.register, payload)
                     .switchMap(result => {
                         if (result.success) {
                             return Observable.of({

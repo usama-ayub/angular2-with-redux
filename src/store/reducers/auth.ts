@@ -9,20 +9,20 @@ export interface IUser {
     email: string
 }
 export interface IError {
-    success: Object,
-    data: any,
-    error: string
+    timestamp: Date,
+    data: Object,
+    type: string
 }
 
 export interface IAuthState {
-    success: Boolean,
-    data: IUser,
+    success: Object,
+    user: IUser,
     error: IError
 }
 
 const InitialState: IAuthState = {
     success: false,
-    data: null,
+    user: null,
     error: null
 };
 
