@@ -5,13 +5,18 @@ import { createEpicMiddleware } from 'redux-observable';
 import { combineReducers } from 'redux';
 
 import { AuthActions } from './action/auth';
+import { TodoActions } from './action/todo';
+
 import { AuthReducer, IAuthState } from './reducers/auth';
+
 import { AuthEpics } from './epics/auth';
+import { TodoEpics } from './epics/todo'
+
 import { HttpService } from './services/http';
-export { HttpService } from './services/http';
+
 
 export interface IAppState {
-   auth?: IAuthState
+    auth?: IAuthState
 }
 
 const AppReducer = combineReducers<IAppState>({
@@ -22,8 +27,8 @@ const AppReducer = combineReducers<IAppState>({
         NgReduxModule
     ],
     providers: [
-        AuthActions,
-        AuthEpics,
+        AuthActions, TodoActions,
+        AuthEpics, TodoEpics,
         HttpService
     ]
 })
@@ -32,7 +37,8 @@ export class StoreModule {
     constructor(
         private ngRedux: NgRedux<IAppState>,
         private devTool: DevToolsExtension,
-        private ae: AuthEpics
+        private ae: AuthEpics,
+        private at: TodoEpics
     ) {
         const middleware = [
             createEpicMiddleware(this.ae.login),
