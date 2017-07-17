@@ -8,19 +8,31 @@ import { AuthActions } from './action/auth';
 import { TodoActions } from './action/todo';
 
 import { AuthReducer, IAuthState } from './reducers/auth';
+import { TodoReducer } from './reducers/todo';
 
 import { AuthEpics } from './epics/auth';
 import { TodoEpics } from './epics/todo'
 
 import { HttpService } from './services/http';
+import { HelperService } from './services/helper';
 
+export { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs';
+export { select, NgRedux } from 'ng2-redux';
+export { bindActionCreators } from 'redux';
+export { AuthActions } from './action/auth';
+export { TodoActions } from './action/todo';
+export { AuthReducer, IAuthState } from './reducers/auth';
+export { HttpService } from './services/http';
+export { HelperService } from './services/helper';
+export { api } from './epics/api';
 
 export interface IAppState {
-    auth?: IAuthState
+    auth?: IAuthState,
 }
 
-const AppReducer = combineReducers<IAppState>({
-    auth: AuthReducer
+const AppReducer = combineReducers({
+    auth: AuthReducer,
+    todo: TodoReducer,
 })
 @NgModule({
     imports: [
@@ -29,7 +41,7 @@ const AppReducer = combineReducers<IAppState>({
     providers: [
         AuthActions, TodoActions,
         AuthEpics, TodoEpics,
-        HttpService
+        HttpService, HelperService
     ]
 })
 

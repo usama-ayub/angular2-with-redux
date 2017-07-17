@@ -10,6 +10,37 @@ import { api } from './api';
 @Injectable()
 export class TodoEpics {
     constructor(private hs: HttpService) { }
+    getTodo = (action$: ActionsObservable<any>) =>
+        action$.ofType(TodoActions.GETTODO)
+            .switchMap(({ payload }) => {
+                return this.hs.PostRequest(api.addTodo, payload)
+                    .switchMap(result => {
+                        if (result.success) {
+                            return Observable.concat(
+                                Observable.of({
+                                    type: TodoActions.GETTODO_SUCCESS,
+                                    payload: <any>result
+                                })
+                            )
+                        } else {
+                            return Observable.concat(
+                                Observable.of({
+                                    type: TodoActions.GETTODO_FAIL,
+                                    payload: <any>result.error
+                                })
+                            )
+                        }
+                    })
+                    .catch(error =>
+                        Observable.concat(
+                            Observable.of({
+                                type: TodoActions.GETTODO_FAIL,
+                                payload: <any>'Error: ' + error
+                            })
+                        )
+                    )
+            });
+
     addTodo = (action$: ActionsObservable<any>) =>
         action$.ofType(TodoActions.ADDTODO)
             .switchMap(({ payload }) => {

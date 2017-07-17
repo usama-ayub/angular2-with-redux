@@ -6,6 +6,10 @@ import { IAppState } from '../';
 
 export class TodoActions {
 
+    static GETTODO: string = 'GETTODO';
+    static GETTODO_SUCCESS: string = 'GETTODO_SUCCESS';
+    static GETTODO_FAIL: string = 'GETTODO_FAIL';
+
     static ADDTODO: string = 'ADDTODO';
     static ADDTODO_SUCCESS: string = 'ADDTODO_SUCCESS';
     static ADDTODO_FAIL: string = 'ADDTODO_FAIL';
@@ -17,13 +21,19 @@ export class TodoActions {
     static FAVOURITETODO: string = 'FAVOURITETODO';
     static FAVOURITETODO_SUCCESS: string = 'FAVOURITETODO_SUCCESS';
     static FAVOURITETODO_FAIL: string = 'FAVOURITETODO_FAIL';
-    
+
 
 
     constructor(
         private ngRedux: NgRedux<IAppState>
     ) { }
 
+    getTodo(credentials: any): void {
+        this.ngRedux.dispatch({
+            type: TodoActions.GETTODO,
+            payload: credentials
+        });
+    }
     addTodo(credentials: Object): void {
         this.ngRedux.dispatch({
             type: TodoActions.ADDTODO,

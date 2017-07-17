@@ -15,6 +15,7 @@ export class AuthEpics {
             .switchMap(({ payload }) => {
                 return this.hs.PostRequest(api.login, payload)
                     .switchMap(result => {
+                        console.log(result);
                         if (result.success) {
                             return Observable.concat(
                                 Observable.of({
