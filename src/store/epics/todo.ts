@@ -13,7 +13,7 @@ export class TodoEpics {
     getTodo = (action$: ActionsObservable<any>) =>
         action$.ofType(TodoActions.GETTODO)
             .switchMap(({ payload }) => {
-                return this.hs.PostRequest(api.addTodo, payload)
+                return this.hs.GetRequest(`${api.getTodo}/${payload}`)
                     .switchMap(result => {
                         if (result.success) {
                             return Observable.concat(
@@ -44,8 +44,10 @@ export class TodoEpics {
     addTodo = (action$: ActionsObservable<any>) =>
         action$.ofType(TodoActions.ADDTODO)
             .switchMap(({ payload }) => {
+                console.log(payload);
                 return this.hs.PostRequest(api.addTodo, payload)
                     .switchMap(result => {
+                        console.log('dd');
                         if (result.success) {
                             return Observable.concat(
                                 Observable.of({
