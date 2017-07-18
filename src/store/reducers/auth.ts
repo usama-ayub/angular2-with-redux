@@ -28,7 +28,6 @@ const InitialState = {
 };
 
 export const AuthReducer = function (state = InitialState, action: { type: string, payload?: any }) {
-    console.log(action);
     switch (action.type) {
         case AuthActions.LOGIN:
             return Object.assign({}, state, {

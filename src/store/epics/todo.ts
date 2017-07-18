@@ -44,10 +44,8 @@ export class TodoEpics {
     addTodo = (action$: ActionsObservable<any>) =>
         action$.ofType(TodoActions.ADDTODO)
             .switchMap(({ payload }) => {
-                console.log(payload);
                 return this.hs.PostRequest(api.addTodo, payload)
                     .switchMap(result => {
-                        console.log('dd');
                         if (result.success) {
                             return Observable.concat(
                                 Observable.of({
@@ -100,7 +98,7 @@ export class TodoEpics {
     deleteTodo = (action$: ActionsObservable<any>) =>
         action$.ofType(TodoActions.DELETETODO)
             .switchMap(({ payload }) => {
-                return this.hs.PostRequest(api.deleteTodo, payload)
+                return this.hs.DeleteRequest(`${api.deleteTodo}/post/${payload}/delete`)
                     .switchMap(result => {
                         if (result.success) {
                             return Observable.of({

@@ -11,17 +11,13 @@ const InitialState = {
         description: '',
         _id: ''
     },
-    getTodo: {
-        createBy: '',
-        description: '',
-        _id: ''
-    },
+    getTodo: [],
+    delTodo: null,
     error: null,
     isLoading: false
 };
 
 export const TodoReducer = function (state = InitialState, action: { type: string, payload?: any }) {
-    console.log(action);
     switch (action.type) {
         case TodoActions.ADDTODO:
             return Object.assign({}, state, {
@@ -53,6 +49,22 @@ export const TodoReducer = function (state = InitialState, action: { type: strin
             return Object.assign({}, state, {
                 success: false,
                 getTodo: action.payload.data,
+                isLoading: false
+            });
+        case TodoActions.DELETETODO:
+            return Object.assign({}, state, {
+                isLoading: true
+            });
+        case TodoActions.DELETETODO_SUCCESS:
+            return Object.assign({}, state, {
+                success: true,
+                delTodo: action.payload.data,
+                isLoading: false
+            });
+        case TodoActions.DELETETODO_FAIL:
+            return Object.assign({}, state, {
+                success: false,
+                delTodo: action.payload.data,
                 isLoading: false
             });
         default:

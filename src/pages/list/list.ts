@@ -15,35 +15,40 @@ export class ListPage implements OnInit {
   @select(['todo', 'getTodo']) getTodo$: Observable<any>;
   subscribtion: Subscription[] = [];
   user: any;
-  todo = [];
+  //todo = [];
+  todos = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public hs: HelperService,
     public ta: TodoActions,
   ) {
-    this.subscribtion[0] = this.isLoading$.subscribe(res => {
-      if (res) return this.hs.presentLoading(false);
-    });
-    this.subscribtion[1] = this.user$.subscribe(user => {
+
+    this.subscribtion[0] = this.user$.subscribe(user => {
       this.user = user;
     })
-    this.subscribtion[2] = this.success$.subscribe(res => {
+
+    this.subscribtion[1] = this.getTodo$.subscribe(todo => {
+      this.todos = todo;
+      console.log(this.todos);
+    })
+    this.subscribtion[2] = this.isLoading$.subscribe(res => {
+      if (res) return this.hs.presentLoading(false);
+    });
+    this.subscribtion[3] = this.success$.subscribe(res => {
       if (!res) {
         return this.hs.dismissLoading();
       }
       this.hs.dismissLoading();
     })
-    this.subscribtion[3] = this.todo$.subscribe(todo => {
-      this.todo.push(todo);
+
+    this.subscribtion[4] = this.todo$.subscribe(todo => {
+      this.todos.push(todo);
     })
-    this.subscribtion[4] = this.getTodo$.subscribe(todo => {
-      this.todo = todo;
-      console.log(this.todo);
-    })
+
   }
   ngOnInit() {
-     this.ta.getTodo(this.user._id);
+    this.ta.getTodo(this.user._id);
   }
   addTodo(item) {
     console.log(item)
@@ -55,6 +60,10 @@ export class ListPage implements OnInit {
       description: item.value.item
     }
     this.ta.addTodo(obj);
+  }
+  deleteTodo(list) {
+    console.log(list);
+    this.ta.deleteTodo(list._id)
   }
 
 }

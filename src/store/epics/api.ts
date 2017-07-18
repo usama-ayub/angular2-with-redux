@@ -10,5 +10,5 @@ export const api = {
   addTodo: base + '/post/add', // POST
   getTodo: base + '/post/user', // GET
   favouriteTodo: base + '/user/todo/favourite', // PUT
-  deleteTodo: base + '/user/:user_id/todo/:todo_id', // DELETE
+  deleteTodo: base , // DELETE
 };

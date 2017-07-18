@@ -20,19 +20,19 @@
       </div>
     </form>
   </div>
-   <div>
-  <!-- <ion-card  *ngFor="let list of todo"> -->
+  <div>
+    <ion-card *ngFor="let list of todos">
 
-  <!-- <ion-card-header>
-  <span style="float: left"><ion-icon name="close" (click)="deleteTodo(item)" ></ion-icon></span>
-  <span style="float: right"> <ion-icon name="bookmark" (click)="isActive(item)" *ngIf="item.isfavourite==true"></ion-icon></span>
-  <span style="float: right"> <ion-icon name="ios-bookmark-outline" (click)="isActive(item)"  *ngIf="item.isfavourite==false"></ion-icon></span>
-  </ion-card-header> -->
+       <ion-card-header>
+  <span style="float: left"><ion-icon name="close" (click)="deleteTodo(list)" ></ion-icon></span>
+  <!-- <span style="float: right"> <ion-icon name="bookmark" (click)="isActive(item)" *ngIf="item.isfavourite==true"></ion-icon></span>
+  <span style="float: right"> <ion-icon name="ios-bookmark-outline" (click)="isActive(item)"  *ngIf="item.isfavourite==false"></ion-icon></span> -->
+  </ion-card-header> 
 
-<!--   <ion-card-content>
-   {{list.description}}
-  </ion-card-content> -->
+      <ion-card-content>
+        {{list.description}}
+      </ion-card-content>
 
-<!-- </ion-card> -->
- </div> 
+    </ion-card>
+  </div>
 </ion-content>
