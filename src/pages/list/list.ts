@@ -13,6 +13,7 @@ export class ListPage implements OnInit {
   @select(['todo', 'isLoading']) isLoading$: Observable<Boolean>;
   @select(['todo', 'todo']) todo$: Observable<Object>;
   @select(['todo', 'getTodo']) getTodo$: Observable<any>;
+  @select(['todo', 'delTodo']) delTodo$: Observable<any>;
   subscribtion: Subscription[] = [];
   user: any;
   //todo = [];
@@ -25,35 +26,37 @@ export class ListPage implements OnInit {
   ) {
 
     this.subscribtion[0] = this.user$.subscribe(user => {
-      this.user = user;
+      if (user) return this.user = user
+      this.user = JSON.parse(localStorage.getItem('user'));
     })
 
     this.subscribtion[1] = this.getTodo$.subscribe(todo => {
       this.todos = todo;
-      console.log(this.todos);
     })
     this.subscribtion[2] = this.isLoading$.subscribe(res => {
       if (res) return this.hs.presentLoading(false);
+      this.hs.dismissLoading();
     });
     this.subscribtion[3] = this.success$.subscribe(res => {
-      if (!res) {
-        return this.hs.dismissLoading();
-      }
-      this.hs.dismissLoading();
+      console.log(res);
     })
 
     this.subscribtion[4] = this.todo$.subscribe(todo => {
       this.todos.push(todo);
     })
-
+    this.subscribtion[4] = this.delTodo$.subscribe(deltodo => {
+      console.log(deltodo);
+    })
   }
+  
   ngOnInit() {
     this.ta.getTodo(this.user._id);
   }
+
   addTodo(item) {
     console.log(item)
     if (!item.valid) {
-      return console.log('input field incomplete')
+      return this.hs.presentToast('input field incomplete');
     }
     let obj = {
       createBy: this.user._id,
@@ -61,9 +64,10 @@ export class ListPage implements OnInit {
     }
     this.ta.addTodo(obj);
   }
-  deleteTodo(list) {
-    console.log(list);
-    this.ta.deleteTodo(list._id)
+
+  deleteTodo(list, index) {
+    this.todos.splice(index, 1);
+    this.ta.deleteTodo(list._id);
   }
 
 }

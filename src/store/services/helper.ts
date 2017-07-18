@@ -8,7 +8,7 @@ export class HelperService {
 
     constructor(private toastCtrl: ToastController, private loadingCtrl: LoadingController) { }
 
-    /*  presentToast(message: string, caller: string) {
+      presentToast(message: string) {
        let toast = this.toastCtrl.create({
          message: message,
          duration: 3000,
@@ -23,7 +23,7 @@ export class HelperService {
          position: 'bottom'
        });
        toast.present();
-     } */
+     } 
     presentLoading(caller: any) {
         this.loading = this.loadingCtrl.create({
             content: caller ? caller : 'Please wait...'

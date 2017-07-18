@@ -46,7 +46,7 @@ export class TodoActions {
             payload: credentials
         })
     }
-    deleteTodo(credentials): void {
+    deleteTodo(credentials:any): void {
         this.ngRedux.dispatch({
             type: TodoActions.DELETETODO,
             payload: credentials

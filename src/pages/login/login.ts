@@ -11,9 +11,9 @@ import { ListPage } from '../../pages/list/list';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  @select(['auth', 'success']) success$: Observable<Boolean>;
-  @select(['auth', 'error']) error$: Observable<Boolean>;
+  @select(['auth', 'success']) success$: Observable<any>;
   @select(['auth', 'isLoading']) isLoading$: Observable<Boolean>;
+
   subscribtion: Subscription[] = [];
   constructor(
     public navCtrl: NavController,
@@ -23,23 +23,27 @@ export class LoginPage {
   ) {
     this.subscribtion[0] = this.isLoading$.subscribe(res => {
       if (res) return this.hs.presentLoading(false);
-    });
-    this.subscribtion[1] = this.success$.subscribe(res => {
-      if (!res) {
-        return this.hs.dismissLoading();
-      }
       this.hs.dismissLoading();
-      this.navCtrl.setRoot(ListPage);
+    });
+    this.success$.subscribe(res => {
       console.log(res);
+      if (!res.success) return this.hs.presentToast(res.error);
+      localStorage.setItem('user', JSON.stringify(res.data));
+
+      this.hs.presentToast('Login Success');
+      this.navCtrl.setRoot(ListPage);
     });
   }
 
   login(user) {
     if (!user.valid) {
-      return console.log('input field incomplete')
+      return this.hs.presentToast('input field incomplete');
     }
     this.aa.login(user.value);
   }
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    let userLogined = JSON.parse(localStorage.getItem('user'));
+    if(userLogined) return this.navCtrl.setRoot(ListPage);
+  }
 
 }

@@ -1,9 +1,5 @@
 import { TodoActions } from '../action/todo';
-export interface Itodo {
-    createBy: string,
-    description: string,
-    _id: string
-}
+
 const InitialState = {
     success: null,
     todo: {
@@ -21,7 +17,8 @@ export const TodoReducer = function (state = InitialState, action: { type: strin
     switch (action.type) {
         case TodoActions.ADDTODO:
             return Object.assign({}, state, {
-                isLoading: true
+                isLoading: true,
+                success: false
             });
         case TodoActions.ADDTODO_SUCCESS:
             return Object.assign({}, state, {
@@ -52,6 +49,7 @@ export const TodoReducer = function (state = InitialState, action: { type: strin
                 isLoading: false
             });
         case TodoActions.DELETETODO:
+        console.log(TodoActions.DELETETODO);
             return Object.assign({}, state, {
                 isLoading: true
             });

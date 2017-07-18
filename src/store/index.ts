@@ -55,7 +55,8 @@ export class StoreModule {
         const middleware = [
             createEpicMiddleware(this.ae.login),
             createEpicMiddleware(this.at.addTodo),
-            createEpicMiddleware(this.at.getTodo)
+            createEpicMiddleware(this.at.getTodo),
+            createEpicMiddleware(this.at.deleteTodo)
         ];
         this.ngRedux.configureStore(
             AppReducer,

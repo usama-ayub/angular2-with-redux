@@ -21,36 +21,38 @@ export interface IAuthState {
 }
 
 const InitialState = {
-    success: null,
+    success: false,
     user: null,
-    error: null,
     isLoading: false
 };
 
 export const AuthReducer = function (state = InitialState, action: { type: string, payload?: any }) {
     switch (action.type) {
         case AuthActions.LOGIN:
+        case AuthActions.REGISTER:
             return Object.assign({}, state, {
                 isLoading: true
             });
         case AuthActions.REGISTER_SUCCESS:
             return Object.assign({}, state, {
-                success: { timestamp: new Date(), type: AuthActions.REGISTER_SUCCESS, data: action.payload }
+                success: action.payload,
+                user: action.payload.data,
+                isLoading: false
             });
         case AuthActions.REGISTER_FAIL:
             return Object.assign({}, state, {
-                error: { timestamp: new Date(), type: AuthActions.REGISTER_FAIL, data: action.payload.data }
+                success: action.payload,
+                isLoading: false
             });
         case AuthActions.LOGIN_SUCCESS:
             return Object.assign({}, state, {
-                success: true,
+                success: action.payload,
                 user: action.payload.data,
                 isLoading: false
             });
         case AuthActions.LOGIN_FAIL:
             return Object.assign({}, state, {
-                success: false,
-                user: action.payload.data,
+                success: action.payload,
                 isLoading: false
             });
         case AuthActions.LOGOUT:

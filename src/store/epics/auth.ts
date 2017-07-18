@@ -17,28 +17,23 @@ export class AuthEpics {
                     .switchMap(result => {
                         console.log(result);
                         if (result.success) {
-                            return Observable.concat(
-                                Observable.of({
-                                    type: AuthActions.LOGIN_SUCCESS,
-                                    payload: <any>result
-                                })
-                            )
+                            return Observable.of({
+                                type: AuthActions.LOGIN_SUCCESS,
+                                payload: <any>result
+                            })
+
                         } else {
-                            return Observable.concat(
-                                Observable.of({
-                                    type: AuthActions.LOGIN_FAIL,
-                                    payload: <any>result.error
-                                })
-                            )
+                            return Observable.of({
+                                type: AuthActions.LOGIN_FAIL,
+                                payload: <any>result
+                            })
                         }
                     })
                     .catch(error =>
-                        Observable.concat(
-                            Observable.of({
-                                type: AuthActions.LOGIN_FAIL,
-                                payload: <any>'Error: ' + error
-                            })
-                        )
+                        Observable.of({
+                            type: AuthActions.LOGIN_FAIL,
+                            payload: <any>error
+                        })
                     )
             });
 
@@ -61,8 +56,7 @@ export class AuthEpics {
                     })
                     .catch(error => Observable.of({
                         type: AuthActions.REGISTER_FAIL,
-                        payload: <any>'Error: ' + JSON.stringify(error)
+                        payload: <any>error
                     }))
             });
-
 }
