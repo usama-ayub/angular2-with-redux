@@ -39,7 +39,7 @@ export class LoginPage {
 
   login(user) {
     if (!user.valid) {
-      return this.hs.presentToast('input field incomplete');
+      return console.log('input field incomplete');
     }
     this.aa.login(user.value);
   }

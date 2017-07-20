@@ -14,8 +14,10 @@ import { RegisterPage } from '../pages/register/register';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { EmailValidator } from '../directives/emailvalidator';
 @NgModule({
   declarations: [
+    EmailValidator,
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,

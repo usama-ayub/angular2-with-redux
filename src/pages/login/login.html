@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,20 +15,31 @@
 
 <ion-content padding>
   <form #user="ngForm" (ngSubmit)="login(user)" novalidate>
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" name="email" #email="ngModel" ngModel required></ion-input>
-    </ion-item>
-     <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" name="password" #password="ngModel" ngModel required></ion-input>
-    </ion-item>
+    <div padding>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" name="email" #email="ngModel" ngModel validateEmail required></ion-input>
+      </ion-item>
+      <ion-item [hidden]="email.valid || (email.pristine && !user.submitted)">
+        <small><i ion-text color="danger">Email is required and format should be john@doe.com.</i></small>
+      </ion-item>
+    </div>
+    <div padding>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" name="password" #password="ngModel" ngModel required></ion-input>
+      </ion-item>
+      <ion-item [hidden]="password.valid || (password.pristine && !user.submitted)">
+        <small><i ion-text color="danger">Password is required</i></small>
+      </ion-item>
+    </div>
+
     <br/>
     <div>
       <button ion-button secondary type="submit" round>Login</button>
     </div>
     <div>
-        <button ion-button clear block [navPush]="register">Register</button>
-      </div>
+      <button ion-button clear block [navPush]="register">Register</button>
+    </div>
   </form>
 </ion-content>
