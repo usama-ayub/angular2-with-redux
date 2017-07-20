@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <form #user="ngForm" (ngSubmit)="login(user)" novalidate>
-    <div padding>
+    <div>
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="email" name="email" #email="ngModel" ngModel validateEmail required></ion-input>
@@ -24,7 +24,7 @@
         <small><i ion-text color="danger">Email is required and format should be john@doe.com.</i></small>
       </ion-item>
     </div>
-    <div padding>
+    <div>
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input type="password" name="password" #password="ngModel" ngModel required></ion-input>
@@ -33,12 +33,11 @@
         <small><i ion-text color="danger">Password is required</i></small>
       </ion-item>
     </div>
-
     <br/>
     <div>
       <button ion-button secondary type="submit" round>Login</button>
     </div>
-    <div>
+    <div style = "float: right">
       <button ion-button clear block [navPush]="register">Register</button>
     </div>
   </form>

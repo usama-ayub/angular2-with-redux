@@ -8,27 +8,25 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <div padding>
     <form #todo="ngForm" (ngSubmit)="addTodo(todo)" novalidate>
       <ion-item>
-        <ion-label floating>Email</ion-label>
+        <ion-label floating>Add Todo Item</ion-label>
         <ion-input type="text" name="item" #item="ngModel" ngModel required></ion-input>
       </ion-item>
       <br/>
-      <div>
+      <div style="float: right">
         <button ion-button secondary type="submit" round>Add Todo</button>
       </div>
     </form>
   </div>
+  <br/>
   <div>
     <ion-card *ngFor="let list of todos; let i = index">
 
       <ion-card-header>
         <span style="float: left"><ion-icon name="close" (click)="deleteTodo(list, i)" ></ion-icon></span>
-        <!-- <span style="float: right"> <ion-icon name="bookmark" (click)="isActive(item)" *ngIf="item.isfavourite==true"></ion-icon></span>
-  <span style="float: right"> <ion-icon name="ios-bookmark-outline" (click)="isActive(item)"  *ngIf="item.isfavourite==false"></ion-icon></span> -->
       </ion-card-header>
-
       <ion-card-content>
         {{list.description}}
       </ion-card-content>

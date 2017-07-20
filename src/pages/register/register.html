@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <form #user="ngForm" (ngSubmit)="register(user)" novalidate>
-    <div padding>
+    <div>
     <ion-item>
       <ion-label floating>First Name</ion-label>
       <ion-input type="text" name="firstName" #firstName="ngModel" ngModel required></ion-input>
@@ -24,7 +24,7 @@
       <small><i ion-text color="danger">First Name is required</i></small>
     </ion-item>
     </div>
-    <div padding>
+    <div>
       <ion-item>
         <ion-label floating>Last Name</ion-label>
         <ion-input type="text" name="lastName" #lastName="ngModel" ngModel required></ion-input>
@@ -33,7 +33,7 @@
         <small><i ion-text color="danger">Last Name is required</i></small>
       </ion-item>
     </div>
-    <div padding>
+    <div>
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="email" name="email" #email="ngModel" ngModel validateEmail required></ion-input>
@@ -42,7 +42,7 @@
         <small><i ion-text color="danger">Email is required and format should be john@doe.com.</i></small>
       </ion-item>
     </div>
-    <div padding>
+    <div>
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input type="password" name="password" #password="ngModel" ngModel required></ion-input>

@@ -19,8 +19,8 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage = LoginPage;
-  pages: Array<{title: string, component: any}>;
-
+  pages: Array<{ title: string, component: any }>;
+  userCheck: any;
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -29,10 +29,11 @@ export class MyApp {
     public aa: AuthActions,
   ) {
     this.initializeApp();
-
+    this.userCheck = JSON.parse(localStorage.getItem('user'));
+    console.log(this.userCheck);
     // set our app's pages
     this.pages = [
-      { title: 'My First List', component: ListPage },
+      { title: 'Todo List', component: ListPage },
       { title: 'login', component: LoginPage },
       { title: 'Register', component: RegisterPage }
     ];
@@ -53,7 +54,7 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-  logout(){
+  logout() {
     this.aa.logout();
     localStorage.clear();
     return this.nav.setRoot(LoginPage);
