@@ -1,9 +1,9 @@
 
-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthActions, Observable, Subscription, HelperService, select } from './../../store';
 import { ListPage } from '../../pages/list/list';
+import { RegisterPage } from './../register/register';
 
 @IonicPage()
 @Component({
@@ -15,12 +15,14 @@ export class LoginPage {
   @select(['auth', 'isLoading']) isLoading$: Observable<Boolean>;
 
   subscribtion: Subscription[] = [];
+  register: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public hs: HelperService,
     public aa: AuthActions,
   ) {
+    this.register = RegisterPage
     this.subscribtion[0] = this.isLoading$.subscribe(res => {
       if (res) return this.hs.presentLoading(false);
       this.hs.dismissLoading();
@@ -43,7 +45,7 @@ export class LoginPage {
   }
   ionViewDidLoad() {
     let userLogined = JSON.parse(localStorage.getItem('user'));
-    if(userLogined) return this.navCtrl.setRoot(ListPage);
+    if (userLogined) return this.navCtrl.setRoot(ListPage);
   }
 
 }

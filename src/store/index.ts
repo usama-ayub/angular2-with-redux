@@ -54,6 +54,7 @@ export class StoreModule {
     ) {
         const middleware = [
             createEpicMiddleware(this.ae.login),
+            createEpicMiddleware(this.ae.register),
             createEpicMiddleware(this.at.addTodo),
             createEpicMiddleware(this.at.getTodo),
             createEpicMiddleware(this.at.deleteTodo)

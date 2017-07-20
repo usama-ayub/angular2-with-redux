@@ -1,5 +1,5 @@
-// const base = 'https://2cerc2sid0.execute-api.us-east-1.amazonaws.com/prod/v1';
-const base = 'http://localhost:3000/api';
+const base = 'https://classified-app-server.herokuapp.com/api';
+// const base = 'http://localhost:3000/api';
 
 
 

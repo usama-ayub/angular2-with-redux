@@ -57,9 +57,9 @@ export const AuthReducer = function (state = InitialState, action: { type: strin
             });
         case AuthActions.LOGOUT:
             return Object.assign({}, state, {
-                success: null,
+                success: false,
                 user: null,
-                error: null
+                isLoading: false
             });
         default:
             return state;
