@@ -9,7 +9,7 @@ import { RegisterPage } from '../pages/register/register';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { AuthActions } from '../store';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +25,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public aa: AuthActions,
   ) {
     this.initializeApp();
 
@@ -53,8 +54,8 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   logout(){
+    this.aa.logout();
     localStorage.clear();
-    this.nav.setRoot(LoginPage);
-    
+    return this.nav.setRoot(LoginPage);
   }
 }
